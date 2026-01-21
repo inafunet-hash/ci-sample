@@ -1,3 +1,3 @@
-#!binsh
+#!/bin/sh
 echo Running test...
 echo OK
