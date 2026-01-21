@@ -1,0 +1,3 @@
+#!binsh
+echo Running test...
+echo OK
