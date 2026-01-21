@@ -4,20 +4,24 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'sed -i "s/\\r$//" test.sh'
-                sh 'chmod +x test.sh'
-                sh './test.sh'
+                sh 'sh test.sh'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'zip -r dist.zip dist'
             }
         }
     }
 
     post {
         success {
-            echo 'CI succeeded'
+            archiveArtifacts artifacts: 'dist.zip', fingerprint: true
+            echo 'CD artifact archived'
         }
         failure {
-            echo 'CI failed'
+            echo 'CI/CD failed'
         }
     }
 }
-
